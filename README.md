@@ -74,7 +74,7 @@ docker run --name some-redis -p 45000:6379 -d redis
 
 
 ## Architecture
-![img.png](img.png)
+![img_1.png](Imagines/img.png)
 
 #### This project has three architectures: 
 - one for the front-end and another for the back-end. The front-end is initialized with React, where it calls the Editor, and within the Editor, it calls Canvas, which contains the logic to render the screen based on p5. Canvas connects to the server through a WSBBChannel object, which is created using a class within the same project and expects a URL to establish the server connection. In summary, React displays the Editor as the skeleton for the Canvas to render actions, and within the Canvas, a WSBBChannel object connects to the server.
@@ -83,7 +83,7 @@ docker run --name some-redis -p 45000:6379 -d redis
 
 All support in Redis and Ticket Based Authorization. Where Redis use the design pattern publish-subscribe.
 
-![img_1.png](img_1.png)
+![img_1.png](Imagines/img_1.png)
 
 ## Testing
 The project uses Jacoco and Sonar Qube, where minimum of achieve is 85% of coverage.
