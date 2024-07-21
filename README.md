@@ -1,5 +1,5 @@
 # Client Concurrent
-This for multi user.
+This is a board interactive drawing allow multiple users in concurrent and real time.  
 [Repository in GitHub here](https://github.com/JffMv/webSocket-ScreenDraw)
 
 ## Getting Started
@@ -22,13 +22,12 @@ git 2.44
 java
 [Install Java](https://www.oracle.com/co/java/technologies/downloads/)
 
+docker
+[Install Docker](https://www.docker.com/products/docker-desktop/)
 
-## Running the tests
 
-This classes haven´t unit test
 
 ## Deployment
-
 
 The process were building project maven with the command:
 
@@ -60,19 +59,39 @@ For generate documentation update the pom.xml add and later use "mvn package":
 </reporting>
 ```
 
+## Docker - Redis
+Open of docker desktop and the run in terminal:
+
+Verify installation:
+ ```
+    docker --version
+```
+Run Redis with docker
+```
+docker run --name some-redis -p 45000:6379 -d redis
+```
+
+
 
 ## Architecture
 ![img.png](img.png)
 
-This project has two architectures: one for the front-end and another for the back-end. The front-end is initialized with React, where it calls the Editor, and within the Editor, it calls Canvas, which contains the logic to render the screen based on p5. Canvas connects to the server through a WSBBChannel object, which is created using a class within the same project and expects a URL to establish the server connection. In summary, React displays the Editor as the skeleton for the Canvas to render actions, and within the Canvas, a WSBBChannel object connects to the server.
+#### This project has three architectures: 
+- one for the front-end and another for the back-end. The front-end is initialized with React, where it calls the Editor, and within the Editor, it calls Canvas, which contains the logic to render the screen based on p5. Canvas connects to the server through a WSBBChannel object, which is created using a class within the same project and expects a URL to establish the server connection. In summary, React displays the Editor as the skeleton for the Canvas to render actions, and within the Canvas, a WSBBChannel object connects to the server.
 
-On the other hand, the back-end architecture supports endpoints, with "/bbService" handling the creation, saving, and modification of sessions, which are listening and sending messages as they are modified. There are specific configurations to ensure concurrency with this endpoint. The Spring Boot application startup class includes a configuration for the port where the endpoint is listening. In BBConfigurator, it informs Spring Boot that this technology will be used and to keep listening. Lastly, there is an implementation of DrawingServiceController to confirm that the server is responding.
+- On the other hand, the back-end architecture supports endpoints, with "/bbService" handling the creation, saving, and modification of sessions, which are listening and sending messages as they are modified. There are specific configurations to ensure concurrency with this endpoint. The Spring Boot application startup class includes a configuration for the port where the endpoint is listening. In BBConfigurator, it informs Spring Boot that this technology will be used and to keep listening. Lastly, there is an implementation of DrawingServiceController to confirm that the server is responding.
 
-It may not be running currently because the service closes upon disconnect. However the app is work.
+All support in Redis and Ticket Based Authorization. Where Redis use the design pattern publish-subscribe.
+
 ![img_1.png](img_1.png)
 
-The following image shows the deployed service being consumed from AWS at the link:
-http://ec2-54-165-39-183.compute-1.amazonaws.com:8080/
+## Testing
+The project uses Jacoco and Sonar Qube, where minimum of achieve is 85% of coverage.
+
+This project have three classes of test.
+- ControllerRestTest
+- DrawingServiceControllerTest
+- TicketRepostitoryTest
 
 
 
@@ -80,7 +99,10 @@ http://ec2-54-165-39-183.compute-1.amazonaws.com:8080/
 
 * [Java](https://www.java.com/es/) - The language used
 * [Maven](https://maven.apache.org/) - Dependency Management
-
+* [React](https://reactjs.org/) - Frontend framework
+* [Redis](https://redis.io/) - Session management and caching
+* [Docker](https://www.docker.com/) - Containerization
+* [Git](http://git-scm.com/) - Version Control System
 
 
 ## Authors
